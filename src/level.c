@@ -46,6 +46,6 @@ int crates_on_map(Level *level){
             }
         }
     }
-    level->crates = crates;
+    level->total_crates = crates;
     return 0;
 }

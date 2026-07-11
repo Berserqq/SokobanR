@@ -4,6 +4,7 @@
 #define MAX_LEVEL_HEIGHT 20
 #define MAX_LEVEL_WIDTH 30
 #define MAX_LEVEL_NAME 64
+#define MAX_LEVEL_PATH 128
 
 
 typedef struct 
@@ -18,7 +19,7 @@ typedef struct
     int passed;
     int best_moves;
 
-    int crates;
+    int total_crates;
 }Level;
 
 int level_load(Level *level, char *filename);

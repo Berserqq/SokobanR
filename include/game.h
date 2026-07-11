@@ -16,6 +16,9 @@ typedef struct
     int last_player_y;
     int last_player_x;
 
+    int moves;
+    int crates;
+
     char last_cells[MAX_LEVEL_HEIGHT][MAX_LEVEL_WIDTH];
     
 } Game;

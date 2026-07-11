@@ -2,18 +2,26 @@
 #include <stdlib.h>
 
 #include "../include/render.h"
+#include "../include/game.h"
 
 
-void render_level(Level *level){
+void render_level(Game *game){
+    char info[2][16];
+    snprintf(info[0], sizeof(info[1]), "   Moves: %d", game->moves);
+    snprintf(info[1], sizeof(info[2]), "   Boxes: %d/%d", crates_on_targets(game), game->level.total_crates);
+
     system("clear");
     printf("\033[H");
 
-    printf("%s", level->name);
-    for (int y = 0; y < level->height; y++)
+    printf("%s", game->level.name);
+    for (int y = 0; y < game->level.height; y++)
     {
-        for (int x = 0; x < level->width; x++)
-            putchar(level->cells[y][x]);
-            putchar('\n');
+        for (int x = 0; x < game->level.width; x++)
+            putchar(game->level.cells[y][x]);
+        if(y < 2){
+            printf("%s", info[y]);
+        }
+        putchar('\n');
     }
 
     printf("\n");

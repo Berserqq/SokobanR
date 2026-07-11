@@ -4,7 +4,6 @@
 #include "../include/game.h"
 #include "../include/level.h"
 #include "../include/input.h"
-#include "../include/render.h"
 
 
 int player_position(Game *game){
@@ -23,9 +22,6 @@ int player_position(Game *game){
 }
 
 int move_player(Game *game, int vector){
-
-    
-    int moves = 0;
     int dx = 0;
     int dy = 0;
 
@@ -66,10 +62,8 @@ int move_player(Game *game, int vector){
     *target = '@';
 
     game->player_x = new_x;
-    game->player_y = new_y;
-    moves++;
-    
-    return moves;
+    game->player_y = new_y; 
+    game->moves++;
 }
 
 int crates_on_targets(Game *game){
