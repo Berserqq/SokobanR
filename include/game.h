@@ -25,7 +25,7 @@ typedef struct
 
 int player_position(Game *game);
 int move_player(Game *game, int vector);
+void last_move(Game *game);
 int crates_on_targets(Game *game);
-
 
 #endif

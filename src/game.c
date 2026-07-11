@@ -31,7 +31,7 @@ int move_player(Game *game, int vector){
         case KEY_LEFT: dx = -1; break;
         case KEY_DOWN: dy = 1; break;
         case KEY_RIGHT: dx = 1; break;
-        default: return 1;
+        default: return 0;
     }
 
     int new_x = game->player_x + dx;
@@ -45,7 +45,7 @@ int move_player(Game *game, int vector){
     char *player_map = &game->level.map[game->player_y][game->player_x];
 
     if(*target == '#' || ((*target == '$' || *target == 'O') && (*next == '#' || *next == '$' || *next == 'O'))){
-        return 1;
+        return 0;
     }
 
     memcpy(game->last_cells, game->level.cells, sizeof(game->level.cells));
@@ -66,6 +66,26 @@ int move_player(Game *game, int vector){
     game->moves++;
 }
 
+void last_move(Game *game){
+    int equal = 1;
+    for(int i = 0; i < game->level.height; i++){
+        for(int j = 0; j < game->level.width; j++){
+            if(game->last_cells[i][j] != game->level.cells[i][j]){
+                equal = 0;
+                break;
+            }
+        }
+        if(equal == 0){
+            break;
+        }
+    }
+    if(equal || game->moves == 0) return;
+    memcpy(game->level.cells, game->last_cells, sizeof(game->last_cells));
+    game->player_x = game->last_player_x; 
+    game->player_y = game->last_player_y;
+    game->moves--;
+}
+
 int crates_on_targets(Game *game){
     int targets = 0;
     for(int y = 0; y < game->level.height; y++){
@@ -77,3 +97,4 @@ int crates_on_targets(Game *game){
     }
     return targets;
 }
+

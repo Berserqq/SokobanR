@@ -16,8 +16,17 @@ void render_level(Game *game){
     printf("%s", game->level.name);
     for (int y = 0; y < game->level.height; y++)
     {
-        for (int x = 0; x < game->level.width; x++)
-            putchar(game->level.cells[y][x]);
+        for (int x = 0; x < game->level.width; x++){
+            switch (game->level.cells[y][x])
+            {
+                case '@': printf("\033[34m@\033[0m"); break;
+                case '$': printf("\033[33m$\033[0m"); break;
+                case 'x': printf("\033[31mx\033[0m"); break;
+                case 'O': printf("\033[32mO\033[0m"); break;
+                default: putchar(game->level.cells[y][x]);
+            }
+        }
+            
         if(y < 2){
             printf("%s", info[y]);
         }

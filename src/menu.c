@@ -5,10 +5,48 @@
 #include <ctype.h>
 
 #include "../include/menu.h"
-#include "../include/level.h"
+#include "../include/game.h"
+#include "../include/render.h"
 
-void main_menu(){
-    
+int main_menu(){
+    // printf("1. Select level\n2. Quit\n");
+    // char select = getchar();
+    // switch (select)
+    // {
+    //     case '1': select_level(); break;
+    //     case '2': exit(0);
+    //     default: break;
+    // }
+}
+
+int select_level(MenuLevels levels[MAX_LEVELS]){
+    int level_count = get_levels(levels);
+
+    int key;
+    int valid_input = 0;
+    do{
+        printf("\033[2J");
+        printf("\033[H");
+
+        printf("====== SELECT LEVEL ======\n\n");
+
+        for (int i = 0; i < level_count; i++)
+        {
+            printf("%d. %s\n",i+1, levels[i].name);
+        }
+        printf("\nChoose level number (1-%d)\n", level_count);
+
+        if(scanf("%d", &key) == 1){
+            if(key >= 1 && key <= level_count){
+                valid_input = 1;
+            }
+        }
+        else{
+            getchar();
+        }
+    }while(!valid_input);
+
+    return key-1;
 }
 
 int get_levels(MenuLevels levels[MAX_LEVELS]){
