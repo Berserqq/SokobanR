@@ -10,7 +10,7 @@ void render_level(Game *game){
     snprintf(info[0], sizeof(info[1]), "   Moves: %d", game->moves);
     snprintf(info[1], sizeof(info[2]), "   Boxes: %d/%d", crates_on_targets(game), game->level.total_crates);
 
-    system("clear");
+    printf("\033[2J");
     printf("\033[H");
 
     printf("%s", game->level.name);
@@ -19,10 +19,10 @@ void render_level(Game *game){
         for (int x = 0; x < game->level.width; x++){
             switch (game->level.cells[y][x])
             {
-                case '@': printf("\033[34m@\033[0m"); break;
-                case '$': printf("\033[33m$\033[0m"); break;
-                case 'x': printf("\033[31mx\033[0m"); break;
-                case 'O': printf("\033[32mO\033[0m"); break;
+                case '@': printf(ANSI_ORANGE "@" ANSI_RESET); break;
+                case '$': printf(ANSI_YELLOW "$" ANSI_RESET); break;
+                case 'x': printf(ANSI_RED "x" ANSI_RESET); break;
+                case 'O': printf(ANSI_GREEN "O" ANSI_RESET); break;
                 default: putchar(game->level.cells[y][x]);
             }
         }

@@ -81,6 +81,7 @@ void last_move(Game *game){
     }
     if(equal || game->moves == 0) return;
     memcpy(game->level.cells, game->last_cells, sizeof(game->last_cells));
+
     game->player_x = game->last_player_x; 
     game->player_y = game->last_player_y;
     game->moves--;
